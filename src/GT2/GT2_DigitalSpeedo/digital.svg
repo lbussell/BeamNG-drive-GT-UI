@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="400"
+   height="400"
+   viewBox="0 0 105.83333 105.83333"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   sodipodi:docname="digital.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.75"
+     inkscape:cx="366.57143"
+     inkscape:cy="180.28571"
+     inkscape:window-width="2560"
+     inkscape:window-height="1369"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <linearGradient
+       id="swatch10"
+       inkscape:swatch="solid"
+       inkscape:label="text">
+      <stop
+         style="stop-color:#ee7f4e;stop-opacity:1;"
+         offset="0"
+         id="stop10" />
+    </linearGradient>
+    <linearGradient
+       id="swatch9"
+       inkscape:swatch="solid"
+       inkscape:label="background">
+      <stop
+         style="stop-color:#333333;stop-opacity:0.20127796;"
+         offset="0"
+         id="stop9" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#swatch9"
+       id="linearGradient9"
+       x1="9.2226191"
+       y1="21.317857"
+       x2="34.168618"
+       y2="21.317857"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.93939286,0,0,0.9708796,56.348239,-2.2341332)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#swatch10"
+       id="linearGradient74"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-1.0489866,3.805363)"
+       x1="27.064934"
+       y1="57.957956"
+       x2="86.070701"
+       y2="57.957956" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#swatch10"
+       id="linearGradient91"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.77422879,0,0,0.77422878,-80.233047,-29.470622)"
+       x1="27.064934"
+       y1="57.957956"
+       x2="86.070701"
+       y2="57.957956" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:44.3822px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;letter-spacing:-3.88345px;writing-mode:lr-tb;direction:ltr;text-anchor:end;opacity:1;fill:url(#linearGradient74);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.10966;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       x="79.20089"
+       y="77.745674"
+       id="speed"
+       transform="scale(1.0501627,0.95223341)"><tspan
+         id="tspan1"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:44.3822px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;letter-spacing:-3.88345px;writing-mode:lr-tb;text-anchor:end;fill:url(#linearGradient74);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.10966;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         x="75.317436"
+         y="77.745674"
+         sodipodi:role="line">114</tspan></text>
+    <g
+       id="gear-indicator"
+       inkscape:label="gear-indicator"
+       transform="translate(-4.5351826,1.5119047)">
+      <rect
+         style="fill:url(#linearGradient9);fill-rule:nonzero;stroke:none;stroke-width:1.01071;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="gear-bg"
+         width="23.434"
+         height="29.063974"
+         x="65.011902"
+         y="3.9309523" />
+      <text
+         xml:space="preserve"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:30.0444px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;letter-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:url(#linearGradient91);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.859241;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+         x="91.38868"
+         y="27.7761"
+         id="gear-text"
+         transform="scale(0.93471721,1.0698423)"><tspan
+           id="tspan1-5"
+           style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:30.0444px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;letter-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:url(#linearGradient91);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.859241;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+           x="91.38868"
+           y="27.7761"
+           sodipodi:role="line">R</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24.6944px;line-height:normal;font-family:Arial;-inkscape-font-specification:'Arial, Bold Italic';font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;text-indent:0;text-align:end;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:-2.51354px;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:end;white-space:normal;opacity:1;fill:#ee7f4e;fill-opacity:1;stroke:#000000;stroke-width:1.05833;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000;stop-opacity:1"
+       x="83.875923"
+       y="95.170273"
+       id="unit"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24.6944px;line-height:normal;font-family:Arial;-inkscape-font-specification:'Arial, Bold Italic';font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;text-indent:0;text-align:end;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:-2.51354px;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:end;white-space:normal;fill:#ee7f4e;fill-opacity:1;stroke:#000000;stroke-width:1.05833;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000;stop-opacity:1"
+         x="81.362381"
+         y="95.170273">mph</tspan></text>
+  </g>
+</svg>

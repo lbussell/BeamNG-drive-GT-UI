@@ -1,0 +1,19 @@
+{
+  "domElement": "<gt2-digital-speedo></gt2-digital-speedo>",
+  "name": "GT2 Digital Speedo",
+  "types": [
+    "ui.apps.categories.vehicle_info"
+  ],
+  "description": "Simple digital speedometer with gear indicator",
+  "css": {
+    "left": "200px",
+    "height": "100px",
+    "width": "300px",
+    "min-width": "300px",
+    "min-height": "60px",
+    "top": "200px"
+  },
+  "author": "Logan Bussell",
+  "version": "0.1.0",
+  "directive": "gt2DigitalSpeedo"
+}
