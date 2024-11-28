@@ -1,0 +1,19 @@
+{
+  "domElement": "<engine-stream-debug></engine-stream-debug>",
+  "name": "Engine Stream Debug",
+  "types": [
+    "ui.apps.categories.vehicle_info"
+  ],
+  "description": "Engine stream debug",
+  "css": {
+    "left": "200px",
+    "height": "100px",
+    "width": "300px",
+    "min-width": "300px",
+    "min-height": "60px",
+    "top": "200px"
+  },
+  "author": "Logan Bussell",
+  "version": "0.1.0",
+  "directive": "engineStreamDebug"
+}

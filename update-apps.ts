@@ -6,6 +6,10 @@ const apps = [
     {
         Dir: "./src/GT2/",
         Name: "GT2_DigitalSpeedo"
+    },
+    {
+        Dir: "./src/Other/",
+        Name: "EngineStreamDebug"
     }
 ]
 
