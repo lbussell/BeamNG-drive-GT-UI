@@ -1,3 +1,5 @@
+// deno-lint-ignore-file
+
 angular.module('beamng.apps').directive('gt2DigitalSpeedo', [function () {
     return {
         template:
@@ -57,7 +59,7 @@ angular.module('beamng.apps').directive('gt2DigitalSpeedo', [function () {
                     } else {
                         // Neutral
                         gearText = 'N';
-                    } 
+                    }
 
                     return gearText;
                 }
