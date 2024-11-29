@@ -10,8 +10,12 @@ const apps = [
     {
         Dir: "./src/Other/",
         Name: "EngineStreamDebug"
+    },
+    {
+        Dir: "./src/Other/",
+        Name: "SimpleAnalogTach"
     }
-]
+];
 
 apps.forEach(app => copyApp(app, appsDir));
 
