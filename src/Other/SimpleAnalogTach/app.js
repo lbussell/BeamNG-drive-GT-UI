@@ -17,18 +17,48 @@ angular.module("beamng.apps").directive("simpleAnalogTach", () => {
             const endAngle = 135;
 
             element.on("load", () => {
-                var svg = element[0].contentDocument;
+                const svg = element[0].contentDocument;
+
+                var initialized = false;
+                const tickMarkGroup = svg.getElementById("tick-marks")
+                const lgTickMark = svg.getElementById("lg");
+                const mdTickMark = svg.getElementById("md");
+                const smTickMark = svg.getElementById("sm");
+
+                var tickMarks = 0;
+                const setTickMarks = () => {
+                    if (initialized) {
+                        return;
+                    }
+
+                    const newTickMark = lgTickMark.cloneNode(true);
+                    newTickMark.setAttribute("id", `lg${tickMarks}`);
+                    tickMarks += 1;
+                    tickMarkGroup.appendChild(newTickMark);
+
+                    initialized = true
+                }
+
+                const getMaxRpm = redline => {
+                    // Examples:
+                    // 5600 redline -> tach limit should be 7000
+                    // 5000 redline -> tach limit should be 6000
+                    const base = Math.floor(redline / 1000) * 1000;
+                    const add = redline % 1000 === 0 ? 1000 : 2000;
+                    return base + add;
+                }
 
                 const setDisplayInfoText = (streams) => {
                     const idleRpm = streams.engineInfo[0];
-                    const maxRpm = streams.engineInfo[1];
+                    const redline = streams.engineInfo[1];
+                    const maxRpm = getMaxRpm(redline);
                     const currentRpm = streams.engineInfo[4].toFixed();
                     const gear = streams.engineInfo[16];
                     svg.getElementById("tspan13-8-1-6").innerHTML = idleRpm;
-                    svg.getElementById("tspan13-8-2").innerHTML = maxRpm;
+                    svg.getElementById("tspan13-8-2").innerHTML = `${redline},${maxRpm}`;
                     svg.getElementById("tspan13-3").innerHTML = currentRpm;
                     svg.getElementById("tspan13-8-1-2-5").innerHTML = gear;
-                }
+                };
 
                 const centerDot = svg.getElementById("center-dot");
                 const rotationCenter = {
@@ -43,7 +73,7 @@ angular.module("beamng.apps").directive("simpleAnalogTach", () => {
                         `rotate(${degrees},${rotationCenter.cx},${rotationCenter.cy})`);
                 };
 
-                const map = (minRpm, maxRpm, n) => {
+                const rpmToAngle = (minRpm, maxRpm, n) => {
                     const pct = n / (maxRpm - minRpm);
                     const interval = endAngle - startAngle;
                     const angle = interval * pct;
@@ -55,9 +85,17 @@ angular.module("beamng.apps").directive("simpleAnalogTach", () => {
                         return;
                     }
 
+                    const redline = streams.engineInfo[1];
+                    const minRpm = 0;
+                    const maxRpm = getMaxRpm(redline);
+
                     setDisplayInfoText(streams);
-                    const needleAngle = map(0, streams.engineInfo[1], streams.engineInfo[4])
+
+                    const currentRpm = streams.engineInfo[4];
+                    const needleAngle = rpmToAngle(minRpm, maxRpm, currentRpm)
                     setNeedlePos(needleAngle);
+
+                    setTickMarks();
                 });
             });
         }
