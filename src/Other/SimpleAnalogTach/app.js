@@ -1,6 +1,21 @@
 // deno-lint-ignore-file
 
 angular.module("beamng.apps").directive("simpleAnalogTach", () => {
+
+    const getLargeRpmTicks = (minRpm, maxRpm) => {
+        const result = Math.floor((maxRpm - minRpm) / 1000)
+        return result;
+    };
+
+    function distributeEvenly(start, end, n) {
+        const interval = (end - start) / (n - 1);
+        const values = [];
+        for (let i = 0; i < n; i++) {
+            values.push(start + i * interval);
+        }
+        return values;
+    }
+
     const directive = {
         template:
             '<object style="width:100%; height:100%; box-sizing:border-box; pointer-events: none" type="image/svg+xml" data="/ui/modules/apps/SimpleAnalogTach/tach.svg"></object>',
@@ -33,12 +48,6 @@ angular.module("beamng.apps").directive("simpleAnalogTach", () => {
 
                 var tickMarks = 0;
 
-                const setTickMark = (degrees, tickMark) => {
-                    tickMark.setAttribute(
-                        "transform",
-                        `rotate(${degrees},${rotationCenter.cx},${rotationCenter.cy})`);
-                }
-
                 const createTickMark = (degrees, templateTickMark) => {
                     const newTickMark = templateTickMark.cloneNode(true);
 
@@ -58,8 +67,10 @@ angular.module("beamng.apps").directive("simpleAnalogTach", () => {
                         return;
                     }
 
-                    const lowTickMark = createTickMark(startAngle, lgTickMark);
-                    const hiTickMark = createTickMark(endAngle, lgTickMark);
+                    const largeTickAngles = distributeEvenly(startAngle, endAngle, getLargeRpmTicks(0, maxRpm) + 1);
+                    for (let i = 0; i < largeTickAngles.length; i++) {
+                        createTickMark(largeTickAngles[i], lgTickMark);
+                    }
 
                     initialized = true
                 }
