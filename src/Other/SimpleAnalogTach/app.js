@@ -25,16 +25,41 @@ angular.module("beamng.apps").directive("simpleAnalogTach", () => {
                 const mdTickMark = svg.getElementById("md");
                 const smTickMark = svg.getElementById("sm");
 
+                const centerDot = svg.getElementById("center-dot");
+                const rotationCenter = {
+                    cx: centerDot.getAttribute("cx"),
+                    cy: centerDot.getAttribute("cy"),
+                };
+
                 var tickMarks = 0;
-                const setTickMarks = () => {
+
+                const setTickMark = (degrees, tickMark) => {
+                    tickMark.setAttribute(
+                        "transform",
+                        `rotate(${degrees},${rotationCenter.cx},${rotationCenter.cy})`);
+                }
+
+                const createTickMark = (degrees, templateTickMark) => {
+                    const newTickMark = templateTickMark.cloneNode(true);
+
+                    newTickMark.setAttribute("id", `tick${tickMarks}`);
+                    tickMarks += 1;
+
+                    tickMarkGroup.appendChild(newTickMark);
+                    newTickMark.setAttribute(
+                        "transform",
+                        `rotate(${degrees},${rotationCenter.cx},${rotationCenter.cy})`);
+                }
+
+                const setTickMarks = (startAngle, endAngle,
+                                      redlineRpm, maxRpm,
+                                      lgTickMark, medTickMark, smallTickMark) => {
                     if (initialized) {
                         return;
                     }
 
-                    const newTickMark = lgTickMark.cloneNode(true);
-                    newTickMark.setAttribute("id", `lg${tickMarks}`);
-                    tickMarks += 1;
-                    tickMarkGroup.appendChild(newTickMark);
+                    const lowTickMark = createTickMark(startAngle, lgTickMark);
+                    const hiTickMark = createTickMark(endAngle, lgTickMark);
 
                     initialized = true
                 }
@@ -58,12 +83,6 @@ angular.module("beamng.apps").directive("simpleAnalogTach", () => {
                     svg.getElementById("tspan13-8-2").innerHTML = `${redline},${maxRpm}`;
                     svg.getElementById("tspan13-3").innerHTML = currentRpm;
                     svg.getElementById("tspan13-8-1-2-5").innerHTML = gear;
-                };
-
-                const centerDot = svg.getElementById("center-dot");
-                const rotationCenter = {
-                    cx: centerDot.getAttribute("cx"),
-                    cy: centerDot.getAttribute("cy"),
                 };
 
                 const setNeedlePos = (degrees) => {
@@ -95,7 +114,10 @@ angular.module("beamng.apps").directive("simpleAnalogTach", () => {
                     const needleAngle = rpmToAngle(minRpm, maxRpm, currentRpm)
                     setNeedlePos(needleAngle);
 
-                    setTickMarks();
+                    if (!initialized)
+                    {
+                        setTickMarks(startAngle, endAngle, redline, maxRpm, lgTickMark, mdTickMark, smTickMark);
+                    }
                 });
             });
         }
