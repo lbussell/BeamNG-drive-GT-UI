@@ -7,10 +7,10 @@
   "description": "Simple analog tachometer",
   "css": {
     "left": "200px",
-    "height": "100px",
+    "height": "300px",
     "width": "300px",
     "min-width": "300px",
-    "min-height": "60px",
+    "min-height": "300px",
     "top": "200px"
   },
   "author": "Logan Bussell",

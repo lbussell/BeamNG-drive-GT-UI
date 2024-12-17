@@ -2,19 +2,152 @@
 
 angular.module("beamng.apps").directive("simpleAnalogTach", () => {
 
-    const getLargeRpmTicks = (minRpm, maxRpm) => {
-        const result = Math.floor((maxRpm - minRpm) / 1000)
-        return result;
+    const StartAngle = -135;
+    const EndAngle = 135;
+    const idleRpmTspanId = "tspan13-8-1-6";
+    const maxRpmTspanId = "tspan13-8-2";
+    const currentRpmTspanId = "tspan13-3";
+    const currentGearTspanId = "tspan13-8-1-2-5";
+
+    const TachometerOptions = {
+        startAngle: -135,
+        endAngle: 135,
+        centerElementId: "center-dot",
+        idleRpmTspanId: "tspan13-8-1-6",
+        maxRpmTspanId: "tspan13-8-2",
+        currentRpmTspanId: "tspan13-3",
+        currentGearTspanId: "tspan13-8-1-2-5",
+        tickMarkGroupId: "tick-marks",
+        largeTickTemplateId: "lg",
+        mediumTickTemplateId: "md",
+        smallTickTemplateId: "sm",
+        smallTicks: 4,
+        needleId: "needle",
     };
 
-    function distributeEvenly(start, end, n) {
-        const interval = (end - start) / (n - 1);
-        const values = [];
-        for (let i = 0; i < n; i++) {
-            values.push(start + i * interval);
-        }
-        return values;
+    const getMaxRpm = redline => {
+        // Examples:
+        // 5600 redline -> tach limit should be 7000
+        // 5000 redline -> tach limit should be 6000
+        const base = Math.floor(redline / 1000) * 1000;
+        const add = redline % 1000 === 0 ? 1000 : 2000;
+        return base + add;
     }
+
+    const _rpmToAngle = (startAngle, endAngle) => (minRpm, maxRpm, currentRpm) => {
+        const pct = currentRpm / (maxRpm - minRpm);
+        const interval = endAngle - startAngle;
+        const angle = interval * pct;
+        return startAngle + angle;
+    };
+
+    const distributeTickMarks = (minRpm, maxRpm, smallTickMarksCount) => {
+        const tickMarks = [];
+
+        // Iterate from minRpm to maxRpm in steps of 1000 for large tick marks
+        for (let rpm = minRpm; rpm <= maxRpm; rpm += 1000) {
+            // Add the large tick mark
+            tickMarks.push({ type: 'lg', rpm });
+
+            // Add the medium tick mark if it's not at the maxRpm
+            if (rpm + 500 <= maxRpm) {
+                tickMarks.push({ type: 'md', rpm: rpm + 500 });
+            }
+
+            // Add small tick marks between large and medium tick marks
+            const smallTickInterval = 500 / (smallTickMarksCount + 1);
+            for (let i = 1; i <= smallTickMarksCount; i++) {
+                const smallTickRpm = rpm + i * smallTickInterval;
+                if (smallTickRpm < rpm + 500 && smallTickRpm <= maxRpm) {
+                    tickMarks.push({ type: 'sm', rpm: smallTickRpm });
+                }
+            }
+
+            // Add small tick marks between medium and next large tick marks
+            for (let i = 1; i <= smallTickMarksCount; i++) {
+                const smallTickRpm = rpm + 500 + i * smallTickInterval;
+                if (smallTickRpm < rpm + 1000 && smallTickRpm <= maxRpm) {
+                    tickMarks.push({ type: 'sm', rpm: smallTickRpm });
+                }
+            }
+        }
+
+        return tickMarks;
+    }
+
+    const createTachometer = (tachOptions, svg, initialStream) =>
+    {
+        var tickMarks = 0;
+
+        const tickMarkGroup = svg.getElementById(tachOptions.tickMarkGroupId);
+        const lgTickMark = svg.getElementById(tachOptions.largeTickTemplateId);
+        const mdTickMark = svg.getElementById(tachOptions.mediumTickTemplateId);
+        const smTickMark = svg.getElementById(tachOptions.smallTickTemplateId);
+        const center = svg.getElementById(tachOptions.centerElementId);
+        const needle = svg.getElementById(tachOptions.needleId);
+
+        const idleRpm = initialStream.engineInfo[0];
+        const redlineRpm = initialStream.engineInfo[1];
+        const minRpm = 0;
+        const maxRpm = getMaxRpm(redlineRpm);
+
+        const rotationCenter = {
+            cx: center.getAttribute("cx"),
+            cy: center.getAttribute("cy"),
+        };
+
+        const rpmToAngle = _rpmToAngle(StartAngle, EndAngle);
+
+        const createTickMark = (tick) => {
+            const templateTickMark =
+                tick.type === "sm" ? smTickMark
+                : tick.type === "md" ? mdTickMark
+                : lgTickMark;
+            const newTickMark = templateTickMark.cloneNode(true);
+            newTickMark.setAttribute("id", `tick${tickMarks}`);
+            newTickMark.style.display = "";
+            tickMarkGroup.appendChild(newTickMark);
+            const degrees = rpmToAngle(minRpm, maxRpm, tick.rpm);
+            newTickMark.setAttribute( "transform", `rotate(${degrees},${rotationCenter.cx},${rotationCenter.cy})`);
+         };
+
+        const createTickMarks = () => {
+            const tickMarks = distributeTickMarks(minRpm, maxRpm, tachOptions.smallTicks);
+            tickMarks.forEach(createTickMark);
+        };
+
+        const initializeDisplayInfoText = () => {
+            svg.getElementById(idleRpmTspanId).innerHTML = idleRpm;
+            svg.getElementById(maxRpmTspanId).innerHTML = `${redlineRpm},${maxRpm}`;
+        };
+
+        const updateDisplayInfoText = (currentRpm, gear) => {
+            svg.getElementById(currentRpmTspanId).innerHTML = currentRpm;
+            svg.getElementById(currentGearTspanId).innerHTML = gear;
+        };
+
+        const updateNeedleAngle = (currentRpm) => {
+            const needleAngle = rpmToAngle(minRpm, maxRpm, currentRpm);
+            needle.setAttribute(
+                "transform",
+                `rotate(${needleAngle},${rotationCenter.cx},${rotationCenter.cy})`);
+        };
+
+        const update = streams => {
+            const currentRpm = streams.engineInfo[4].toFixed();
+            const gear = streams.engineInfo[16];
+
+            updateNeedleAngle(currentRpm);
+            updateDisplayInfoText(currentRpm, gear);
+        }
+
+        initializeDisplayInfoText();
+        createTickMarks();
+
+        return {
+            update: update,
+        };
+    };
 
     const directive = {
         template:
@@ -28,108 +161,20 @@ angular.module("beamng.apps").directive("simpleAnalogTach", () => {
             StreamsManager.add(streams);
             scope.$on("$destroy", () => StreamsManager.remove(streams));
 
-            const startAngle = -135;
-            const endAngle = 135;
-
             element.on("load", () => {
                 const svg = element[0].contentDocument;
-
-                var initialized = false;
-                const tickMarkGroup = svg.getElementById("tick-marks")
-                const lgTickMark = svg.getElementById("lg");
-                const mdTickMark = svg.getElementById("md");
-                const smTickMark = svg.getElementById("sm");
-
-                const centerDot = svg.getElementById("center-dot");
-                const rotationCenter = {
-                    cx: centerDot.getAttribute("cx"),
-                    cy: centerDot.getAttribute("cy"),
-                };
-
-                var tickMarks = 0;
-
-                const createTickMark = (degrees, templateTickMark) => {
-                    const newTickMark = templateTickMark.cloneNode(true);
-
-                    newTickMark.setAttribute("id", `tick${tickMarks}`);
-                    tickMarks += 1;
-                    newTickMark.style.display = "";
-
-                    tickMarkGroup.appendChild(newTickMark);
-                    newTickMark.setAttribute(
-                        "transform",
-                        `rotate(${degrees},${rotationCenter.cx},${rotationCenter.cy})`);
-                }
-
-                const setTickMarks = (startAngle, endAngle,
-                                      redlineRpm, maxRpm,
-                                      lgTickMark, medTickMark, smallTickMark) => {
-                    if (initialized) {
-                        return;
-                    }
-
-                    const largeTickAngles = distributeEvenly(startAngle, endAngle, getLargeRpmTicks(0, maxRpm) + 1);
-                    for (let i = 0; i < largeTickAngles.length; i++) {
-                        createTickMark(largeTickAngles[i], lgTickMark);
-                    }
-
-                    initialized = true
-                }
-
-                const getMaxRpm = redline => {
-                    // Examples:
-                    // 5600 redline -> tach limit should be 7000
-                    // 5000 redline -> tach limit should be 6000
-                    const base = Math.floor(redline / 1000) * 1000;
-                    const add = redline % 1000 === 0 ? 1000 : 2000;
-                    return base + add;
-                }
-
-                const setDisplayInfoText = (streams) => {
-                    const idleRpm = streams.engineInfo[0];
-                    const redline = streams.engineInfo[1];
-                    const maxRpm = getMaxRpm(redline);
-                    const currentRpm = streams.engineInfo[4].toFixed();
-                    const gear = streams.engineInfo[16];
-                    svg.getElementById("tspan13-8-1-6").innerHTML = idleRpm;
-                    svg.getElementById("tspan13-8-2").innerHTML = `${redline},${maxRpm}`;
-                    svg.getElementById("tspan13-3").innerHTML = currentRpm;
-                    svg.getElementById("tspan13-8-1-2-5").innerHTML = gear;
-                };
-
-                const setNeedlePos = (degrees) => {
-                    const needle = svg.getElementById("needle");
-                    needle.setAttribute(
-                        "transform",
-                        `rotate(${degrees},${rotationCenter.cx},${rotationCenter.cy})`);
-                };
-
-                const rpmToAngle = (minRpm, maxRpm, n) => {
-                    const pct = n / (maxRpm - minRpm);
-                    const interval = endAngle - startAngle;
-                    const angle = interval * pct;
-                    return startAngle + angle;
-                }
+                var tachometer = undefined;
 
                 scope.$on('streamsUpdate', (event, streams) => {
                     if (!streams.engineInfo) {
                         return;
                     }
 
-                    const redline = streams.engineInfo[1];
-                    const minRpm = 0;
-                    const maxRpm = getMaxRpm(redline);
-
-                    setDisplayInfoText(streams);
-
-                    const currentRpm = streams.engineInfo[4];
-                    const needleAngle = rpmToAngle(minRpm, maxRpm, currentRpm)
-                    setNeedlePos(needleAngle);
-
-                    if (!initialized)
-                    {
-                        setTickMarks(startAngle, endAngle, redline, maxRpm, lgTickMark, mdTickMark, smTickMark);
+                    if (!tachometer) {
+                        tachometer = createTachometer(TachometerOptions, svg, streams);
                     }
+
+                    tachometer.update(streams);
                 });
             });
         }
