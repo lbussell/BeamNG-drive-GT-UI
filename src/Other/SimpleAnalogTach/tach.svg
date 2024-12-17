@@ -24,8 +24,8 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="2"
-     inkscape:cx="330.5"
-     inkscape:cy="223.75"
+     inkscape:cx="248"
+     inkscape:cy="259.75"
      inkscape:window-width="2560"
      inkscape:window-height="1369"
      inkscape:window-x="2552"
@@ -80,7 +80,7 @@
        id="tick-marks"
        sodipodi:insensitive="true">
       <rect
-         style="display:inline;fill:#ffffff;stroke:#000000;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1"
+         style="display:none;fill:#ffffff;stroke:#000000;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1"
          id="lg"
          width="2.1170001"
          height="8.4666662"

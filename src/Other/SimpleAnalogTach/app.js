@@ -53,6 +53,7 @@ angular.module("beamng.apps").directive("simpleAnalogTach", () => {
 
                     newTickMark.setAttribute("id", `tick${tickMarks}`);
                     tickMarks += 1;
+                    newTickMark.style.display = "";
 
                     tickMarkGroup.appendChild(newTickMark);
                     newTickMark.setAttribute(
