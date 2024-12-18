@@ -116,14 +116,9 @@ angular.module("beamng.apps").directive("simpleAnalogTach", () => {
             tickMarks.forEach(createTickMark);
         };
 
-        const initializeDisplayInfoText = () => {
-            svg.getElementById(idleRpmTspanId).innerHTML = idleRpm;
-            svg.getElementById(maxRpmTspanId).innerHTML = `${redlineRpm},${maxRpm}`;
-        };
-
         const updateDisplayInfoText = (currentRpm, gear) => {
-            svg.getElementById(currentRpmTspanId).innerHTML = currentRpm;
-            svg.getElementById(currentGearTspanId).innerHTML = gear;
+            // svg.getElementById(currentRpmTspanId).innerHTML = currentRpm;
+            // svg.getElementById(currentGearTspanId).innerHTML = gear;
         };
 
         const updateNeedleAngle = (currentRpm) => {
@@ -141,7 +136,6 @@ angular.module("beamng.apps").directive("simpleAnalogTach", () => {
             updateDisplayInfoText(currentRpm, gear);
         }
 
-        initializeDisplayInfoText();
         createTickMarks();
 
         return {
