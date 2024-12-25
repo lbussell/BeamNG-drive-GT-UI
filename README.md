@@ -4,6 +4,10 @@ UI Mods for BeamNG.drive inspired by a certain racing game franchise.
 
 ## Mods
 
+### GT4 - Digital Speedo + Tach
+
+![screenshot of GT4 digital speedo and tach](/src/GT4/GT4_Digital/app.png)
+
 ### GT2 - Digital Only
 
 ![screenshot of GT2 digital speedometer](/src/GT2/GT2_DigitalSpeedo/app.png)

@@ -1,0 +1,19 @@
+{
+  "domElement": "<gt4-digital></gt4-digital>",
+  "name": "GT4 Digital Speedo",
+  "types": [
+    "ui.apps.categories.vehicle_info"
+  ],
+  "description": "Digital speedo + tach",
+  "css": {
+    "bottom": "50px",
+    "right": "50px",
+    "height": "110px",
+    "min-height": "110px",
+    "width": "450px",
+    "min-width": "450px"
+  },
+  "author": "Logan Bussell",
+  "version": "0.1.0",
+  "directive": "gt4Digital"
+}

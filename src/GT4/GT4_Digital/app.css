@@ -1,0 +1,114 @@
+.gt4-container {
+  font-size: 40px;
+  font-family: "Michroma", monospace;
+  font-weight: 400;
+  font-style: normal;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.bg-blue {
+  background-color: #CAE9F8BB;
+}
+
+.bg-gray {
+  background: linear-gradient(180deg, rgba(16,16,16,1) 0%, rgba(16,16,16,0.70) 100%);
+}
+
+.gt4-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.gt4-row-tach {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-top: 0.1em;
+}
+
+.red-dot {
+  width: 12px;
+  height: 12px;
+  margin-bottom: 0.2em;
+
+  background-color: rgba(16,16,16,0.70);
+  border-radius: 4px;
+}
+
+.blinking-red {
+  animation: flash 0.15s step-start infinite;
+}
+
+.gear {
+  color: black;
+  width: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.number-box {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0.25em;
+  padding-top: 0.15em;
+  border-radius: 0.1em;
+  width: min-content;
+  margin-left: 0.3em;
+}
+
+.number {
+  line-height: 1;
+}
+
+.gt4-unit {
+  font-size: 18px;
+  margin-left: 0.3em;
+  color: #888888;
+}
+
+.speed {
+  text-align: right;
+  width: 3em;
+  color: #CAE9F8FF;
+}
+
+.red-line {
+  background-color: #F81902;
+  margin-top: 0.4em;
+  height: 4px;
+  width: 129px;
+}
+
+.tach-bg {
+  margin-top: 0.1em;
+  height: 20px;
+}
+
+.tach {
+  width: 44%;
+  height: 20px;
+}
+
+.bar {
+  height: 20px;
+  width: 8px;
+  margin-left: 3px;
+}
+
+.on {
+  background-color: #CAE9F8FF;
+}
+
+.off {
+  background-color: rgba(16,16,16,0.70);
+}
+
+@keyframes flash {
+  50% { background-color: #F81902; }
+}
