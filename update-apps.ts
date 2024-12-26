@@ -12,6 +12,10 @@ const apps = [
         Name: "GT4_Digital"
     },
     {
+        Dir: "./src/GT4/",
+        Name: "GT4_GForce"
+    },
+    {
         Dir: "./src/Other/",
         Name: "EngineStreamDebug"
     },

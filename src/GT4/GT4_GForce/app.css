@@ -1,0 +1,56 @@
+.gt4-g-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: auto;
+}
+
+.gt4-g-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.gt4-g-bar {
+  width: 98%;
+  height: 20px;
+  justify-content: space-evenly;
+  align-items: center;
+  position: relative;
+  background-color: rgba(16,16,16,0.70);
+}
+
+.gt4-g-text {
+  color: white;
+  font-family: michroma;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.gt4-g-dot {
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background-color: darkgray;
+}
+
+.gt4-g-line {
+  width: 2px;
+  height: 100%;
+  background-color: darkgray;
+}
+
+.gt4-g-indicator {
+  height: 11px;
+  width: 11px;
+  border-radius: 4px;
+  background-color: #CAE9F8FF;
+
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  /* transition: all 0.03s; */
+
+  left: 50%;
+}
